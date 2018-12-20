@@ -1,0 +1,44 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~']
+
+# null (or ~) value means symlink from file with same name without leading dot
+- link:
+    ~/.dotfiles: ''
+
+    # zsh & terminator
+    ~/.oh-my-zsh: ~
+    ~/antigen: ~
+    ~/.zshrc: ~
+    ~/.fonts: ~
+    ~/.fzf: ~
+    ~/.config/terminator: config/terminator
+
+    # git
+    ~/.gitconfig: ~
+    ~/.gitignore_global: ~
+
+    # vim
+    ~/.vimrc: ~
+    ~/.vim/bundle: vim/bundle
+
+    # nvm
+    ~/.nvm: ~
+
+- shell:
+  - [sudo apt-get install terminator -y, Installing terminator cause we need to rock this up]
+  - [sudo apt-get install git -y, "Installing git because why not?"]
+  - [sudo apt-get install curl -y, Installing curl cause u know sometimes chrome is not enough]
+  - [sudo apt-get install zsh -y, Installing zsh]
+  - [sudo apt-get install vim -y, Installing vim]
+  - [sudo chmod +x ohmyzsh.sh && ./ohmyzsh.sh, Installing Ohmyzsh]
+  - [fc-cache -f ~/.fonts, Rebuilding font cache]
+  - [~/.fzf/install --all, Installing fzf]
+  - [vim +PluginInstall +qall, Installing vim plugins with Vundle]
+  - [sudo chmod +x nvm.sh && ./nvm.sh, "Installing nvm (Please update to the latest if the script is not updated)"]
+  - [nvm install node, Installing node]
+  - [node -v, Current node version]
+  
